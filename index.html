@@ -1,98 +1,613 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Mohammad Sahragard">
-    <title>Responsive Profile Page</title>
-    <!-- import font icon (fontawesome) -->
-    <script src="https://kit.fontawesome.com/b8b432d7d3.js" crossorigin="anonymous"></script>
-    <!-- import css file (style.css) -->
-    <link rel="stylesheet" href="style.css">
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <title>Nguyen Van Dat | Profile</title>
+    <link href="css/bootstrap.min_1.css" rel="stylesheet" id="bootstrap-css">
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="icon" href="images/catavt.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Braah+One&family=Tilt+Neon&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <style type="text/css">
+        body {
+            margin-top: 20px;
+            color: #1a202c;
+            text-align: left;
+            background-color: #e2e8f0;
+
+        }
+        .rounded-circle{
+            border: 3px solid dodgerblue;
+            padding: 6px;
+        }
+
+        .main-body {
+            padding: 15px;
+        }
+
+        .card {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 0 solid rgba(0, 0, 0, .125);
+            border-radius: .25rem;
+        }
+        .text-dark{
+            font-family: 'Braah One', sans-serif;
+             background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+  -webkit-background-clip: text;
+
+        }
+
+        .card-body {
+            flex: 1 1 auto;
+            min-height: 1px;
+            padding: 1rem;
+        }
+
+        .gutters-sm {
+            margin-right: -8px;
+            margin-left: -8px;
+        }
+
+        .gutters-sm>.col,
+        .gutters-sm>[class*=col-] {
+            padding-right: 8px;
+            padding-left: 8px;
+        }
+
+        .mb-3,
+        .my-3 {
+            margin-bottom: 1rem !important;
+        }
+
+        .bg-gray-300 {
+            background-color: #e2e8f0;
+        }
+
+        .h-100 {
+            height: 100% !important;
+        }
+
+        .shadow-none {
+            box-shadow: none !important;
+        }
+
+        .webheader {
+            margin: 0px auto;
+            max-width: 960px;
+        }
+        #kbn {
+            position: fixed;
+            bottom: 0px;
+            width: 100px;
+            right: 0px;
+            z-index: 999;
+        }
+
+        .inner-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        ul#main-menu {
+            display: flex;
+        }
+
+        ul#main-menu a {
+            text-transform: uppercase;
+            padding: 10px 20px;
+            color: #000;
+            display: block;
+            font-weight: bold;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #logo {
+            color: #000;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 1.5rem;
+
+            header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                border-bottom: 10px solid #000;
+                padding: 10px 0px;
+            }
+
+            #content h1 {
+                padding: 30px 0px;
+            }
+
+            #content p {
+                margin-bottom: 1.2rem;
+            }
+
+            #banner {
+                background: url(https://th.bing.com/th/id/OIP.3V9rvlvUhVfNGpIjLv5DTAHaFj?w=247&h=185&c=7&r=0&o=5&pid=1.7)
+            }
+    </style>
+    <script type="text/javascript">
+        
+
+//▬▬▬▬▬▬▬▬▬▬
+   // HOA ANH DAO
+//▬▬▬▬▬▬▬▬▬▬
+var stop, staticx;
+var img = new Image();
+img.src = "https://i.imgur.com/kT576b0.png";
+
+            function Sakura(x, y, s, r, fn) {
+                this.x = x;
+                this.y = y;
+                this.s = s;
+                this.r = r;
+                this.fn = fn;
+            }
+
+            Sakura.prototype.draw = function(cxt) {
+                cxt.save();
+                var xc = 40 * this.s / 4;
+                cxt.translate(this.x, this.y);
+                cxt.rotate(this.r);
+                cxt.drawImage(img, 0, 0, 40 * this.s, 40 * this.s)
+                cxt.restore();
+            }
+
+            Sakura.prototype.update = function() {
+                this.x = this.fn.x(this.x, this.y);
+                this.y = this.fn.y(this.y, this.y);
+                this.r = this.fn.r(this.r);
+                if(this.x > window.innerWidth ||
+                    this.x < 0 ||
+                    this.y > window.innerHeight ||
+                    this.y < 0
+                ) {
+                    this.r = getRandom('fnr');
+                    if(Math.random() > 0.4) {
+                        this.x = getRandom('x');
+                        this.y = 0;
+                        this.s = getRandom('s');
+                        this.r = getRandom('r');
+                    } else {
+                        this.x = window.innerWidth;
+                        this.y = getRandom('y');
+                        this.s = getRandom('s');
+                        this.r = getRandom('r');
+                    }
+                }
+            }
+
+            SakuraList = function() {
+                this.list = [];
+            }
+            SakuraList.prototype.push = function(sakura) {
+                this.list.push(sakura);
+            }
+            SakuraList.prototype.update = function() {
+                for(var i = 0, len = this.list.length; i < len; i++) {
+                    this.list[i].update();
+                }
+            }
+            SakuraList.prototype.draw = function(cxt) {
+                for(var i = 0, len = this.list.length; i < len; i++) {
+                    this.list[i].draw(cxt);
+                }
+            }
+            SakuraList.prototype.get = function(i) {
+                return this.list[i];
+            }
+            SakuraList.prototype.size = function() {
+                return this.list.length;
+            }
+
+            function getRandom(option) {
+                var ret, random;
+                switch(option) {
+                    case 'x':
+                        ret = Math.random() * window.innerWidth;
+                        break;
+                    case 'y':
+                        ret = Math.random() * window.innerHeight;
+                        break;
+                    case 's':
+                        ret = Math.random();
+                        break;
+                    case 'r':
+                        ret = Math.random() * 5;
+                        break;
+                    case 'fnx':
+                        random = -0.5 + Math.random() * 1;
+                        ret = function(x, y) {
+                            return x + 0.5 * random - 1;
+                        };
+                        break;
+                    case 'fny':
+                        random = 0.5 + Math.random() * 0.5
+                        ret = function(x, y) {
+                            return y + random;
+                        };
+                        break;
+                    case 'fnr':
+                        random = Math.random() * 0.01;
+                        ret = function(r) {
+                            return r + random;
+                        };
+                        break;
+                }
+                return ret;
+            }
+
+            function startSakura() {
+
+                requestAnimationFrame = window.requestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.msRequestAnimationFrame ||
+                    window.oRequestAnimationFrame;
+                var canvas = document.createElement('canvas'),
+                    cxt;
+                staticx = true;
+                canvas.height = window.innerHeight;
+                canvas.width = window.innerWidth;
+                canvas.setAttribute('style', 'position: fixed;left: 0;top: 0;pointer-events: none;');
+                canvas.setAttribute('id', 'canvas_sakura');
+                document.getElementsByTagName('body')[0].appendChild(canvas);
+                cxt = canvas.getContext('2d');
+                var sakuraList = new SakuraList();
+                for(var i = 0; i < 50; i++) {
+                    var sakura, randomX, randomY, randomS, randomR, randomFnx, randomFny;
+                    randomX = getRandom('x');
+                    randomY = getRandom('y');
+                    randomR = getRandom('r');
+                    randomS = getRandom('s');
+                    randomFnx = getRandom('fnx');
+                    randomFny = getRandom('fny');
+                    randomFnR = getRandom('fnr');
+                    sakura = new Sakura(randomX, randomY, randomS, randomR, {
+                        x: randomFnx,
+                        y: randomFny,
+                        r: randomFnR
+                    });
+                    sakura.draw(cxt);
+                    sakuraList.push(sakura);
+                }
+                stop = requestAnimationFrame(function() {
+                    cxt.clearRect(0, 0, canvas.width, canvas.height);
+                    sakuraList.update();
+                    sakuraList.draw(cxt);
+                    stop = requestAnimationFrame(arguments.callee);
+                })
+            }
+
+            window.onresize = function() {
+                var canvasSnow = document.getElementById('canvas_snow');
+                canvasSnow.width = window.innerWidth;
+                canvasSnow.height = window.innerHeight;
+            }
+
+            img.onload = function() {
+                startSakura();
+            }
+
+            function stopp() {
+                if(staticx) {
+                    var child = document.getElementById("canvas_sakura");
+                    child.parentNode.removeChild(child);
+                    window.cancelAnimationFrame(stop);
+                    staticx = false;
+                } else {
+                    startSakura();
+                }
+            }
+        
+            
+
+
+//////////////////////////////////////////////////////////////
+
+        
+    </script>
 </head>
-<body>
-    <div class="container">
-
-        <div class="profile-card">
-            <div class="profile-header"><!-- profile header section -->
-                <div class="main-profile">
-                    <div class="profile-image"></div>
-                    <div class="profile-names">
-                        <h1 class="username">Mohammad.S</h1>
-                        <small class="page-title">Front-End developer</small>
-                    </div>
-                </div>
+<body onclick="audio.play()">
+    <div>
+        <header>
+            <div class="inner-header webheader">
+                
+                <nav>
+                    <ul id="main-menu">
+                        <li><a href="#">HOME</a>
+                        </li>
+                        <a href="">DOWNLOAD</a>
+                        
+                        <!-- <li><a href="">Tool</a></li>
+                        <li><a href="">Tool2</a></li>
+                        <li><a href="">Tool3</a></li>
+                        <li><a href="">Tool4</a></li>
+                        <li class="nav-item dropdown text-upper">
+                            <a class="nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">Tools</a>
+                            <div class="dropdown-menu dropdown-menu-dark"> <a class=" dropdown-item "
+                                    href="/tools/whois">Whois Tên Miền</a>
+                                <a class=" dropdown-item " href="/tools/getId">Get ID FB</a>
+                                <a class=" dropdown-item " href="/tools/2FA">Lấy Mã 2FA</a>
+                                <a class=" dropdown-item " href="/tools/create-profiles">Tạo Hồ Sơ</a>
+                                <a class=" dropdown-item " href="/tools/list-profiles">Danh Sách Hồ Sơ</a>
+                            </div>
+                        </li> -->
+                    </ul>
+                </nav>
             </div>
-
-            <div class="profile-body"><!-- profile body section -->
-                <div class="profile-actions">
-                    <button class="follow">Follow</button>
-                    <button class="message">Message</button>
-                    <section class="bio">
-                        <div class="bio-header">
-                            <i class="fa fa-info-circle"></i>
-                            Bio
+        </header>
+    </div>
+    <div id="banner"></div>
+    <div class="container">
+        <div class="main-body">
+            <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img src="images/animegirl.jpg" alt="Ảnh đại diện" class="rounded-circle" width="150">
+                                <div class="mt-3">
+                                    <h4>Nguyen Van Dat</h4>
+                                    <p class="text-secondary mb-1">Developer</p>
+                                    <p class="text-muted font-size-sm">Hanoi, Vietnam</p>
+                                    <button style="background-color: red; border: 1px solid red;" onclick="location.href='https://www.facebook.com/vdat.art'" class="btn btn-primary">Follow</button>
+                                    <button style="border: 1px solid red;
+                                    color: red;  onclick="location.href='https://m.me/vdat.art' class="btn btn-outline-primary">Message</button>
+                                </div>
+                            </div>
                         </div>
-                        <p class="bio-text">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                        </p>
-                    </section>
+                    </div>
+                    <div class="card mt-3">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                        </path>
+                                    </svg>Website</h6>
+                                <span class="text-secondary">vdat.dev</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github mr-2 icon-inline">
+                                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                                        </path>
+                                    </svg>Github</h6>
+                                <span class="text-secondary">UNKNOWN</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter mr-2 icon-inline text-info">
+                                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+                                        </path>
+                                    </svg>Twitter</h6>
+                                <span class="text-secondary">UNKNOWN</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram mr-2 icon-inline text-danger">
+                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                    </svg>Instagram</h6>
+                                <span class="text-secondary">vdat.art</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary">
+                                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z">
+                                        </path>
+                                    </svg>Facebook</h6>
+                                <span class="text-secondary">vdat.art</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-
-                <div class="account-info">
-                    <div class="data">
-                        <div class="important-data">
-                            <section class="data-item">
-                                <h3 class="value">104</h3>
-                                <small class="title">Post</small>
-                            </section>
-                            <section class="data-item">
-                                <h3 class="value">21K</h3>
-                                <small class="title">Follower</small>
-                            </section>
-                            </section>
-                            <section class="data-item">
-                                <h3 class="value">51</h3>
-                                <small class="title">Following</small>
-                            </section>
-                        </div>
-                        <div class="other-data">
-                            <section class="data-item">
-                                <h3 class="value">41K</h3>
-                                <small class="title">Likes</small>
-                            </section>
-                            <section class="data-item">
-                                <h3 class="value">12K</h3>
-                                <small class="title">Comments</small>
-                            </section>
-                            <section class="data-item">
-                                <h3 class="value">2K</h3>
-                                <small class="title">Saved</small>
-                            </section>
+                <div class="col-md-8">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    Nguyen Van Dat
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    admin@vdat.dev
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Phone</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    037***8671
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Mobile</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    123456789
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Address</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    Hanoi, Vietnam
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="social-media">
-                        <span>Follow me in:</span>
-                        <a href="" class="media-link"><i class="fab fa-facebook-square"></i></a>
-                        <a href="https://twitter.com/MammadSahragard" class="media-link"><i class="fab fa-twitter-square"></i></a>
-                        <a href="https://www.linkedin.com/in/mohammadsahragard/" class="media-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://www.instagram.com/mammad.sahragard/" class="media-link"><i class="fab fa-instagram-square"></i></a>
-                        <a href="https://github.com/MohammadSahragard" class="media-link"><i class="fab fa-github-square"></i></a>
-                    </div>
-
-                    <div class="last-post">
-                        <div class="post-cover">
-                            <span class="last-badge">Last Post</span>
+                    <div class="row gutters-sm">
+                        <div class="col-sm-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">My skills</i>Website Developer</h6>
+                                    <small>Web Design</small>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>Website Markup</small>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>One Page</small>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>Mobile Template</small>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>Backend API</small>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="post-title">3D layer</h3>
-                        <button class="post-CTA">View</button>
+                        <div class="col-sm-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">My skills</i>Game Developer</h6>
+                                    <small>Engines</small>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>Mobile Gaming</small>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>Art + Design</small>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>Coding</small>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small>Programing</small>
+                                    <div class="progress mb-3" style="height: 5px">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-</body>
-</html>
+    <img id="kbn" src="https://api.thanhdieu.com/anime-cb.php" alt="Anime Girl">
+    <div padding-bottom="20px" align="center" style="color: rgb(14, 13, 14); font-size: 16px; font-family: 'Rowdies';">
+        <br>
+        <span class="text-dark">Hoạt động được: <span style="color: rgb(16, 17, 17);
+     animation: colorRotate 2.5s linear 0s infinite;
+     @keyframes colorRotate {
+         from {
+           color: #FF0000;
+         }
+         10% {
+           color: #00FFFF;
+         }
+         50% {
+           color: #00FF00;
+         }
+          100% {
+           color: #FFFF00;
+         }
+       } font-size: 16px;" id="momk"></span>
+   </span>
+        <script>
+            function star() {
+                setTimeout(function () {
+                }, 3000);
+            }
+            function show_date_time() {
+                window.setTimeout("show_date_time()", 1000);
+                BirthDay = new Date("2008/01/04");
+                today = new Date();
+                timeold = (today.getTime() - BirthDay.getTime());
+                sectimeold = timeold / 1000
+                secondsold = Math.floor(sectimeold);
+                msPerDay = 24 * 60 * 60 * 1000
+                e_daysold = timeold / msPerDay
+                daysold = Math.floor(e_daysold);
+                e_hrsold = (daysold - e_daysold) * -24;
+                hrsold = Math.floor(e_hrsold);
+                e_minsold = (hrsold - e_hrsold) * -60;
+                minsold = Math.floor((hrsold - e_hrsold) * -60);
+                seconds = Math.floor((minsold - e_minsold) * -60);
+                momk.innerHTML = daysold + " ngày " + hrsold + " giờ " + minsold + " phút " + seconds + " giây";
+            }
+            show_date_time();
+        </script>
+        <script>
+            var audio = new Audio('https://files.catbox.moe/du93az.mp3');
+      
+            audio.oncanplaythrough = function(){
+            audio.play();
+            }
+            
+            audio.loop = true;
+            
+            audio.onended = function(){
+            audio.play();
+            }
+   
+        </script>
+        <script>
+            Swal.fire();
+
+            Swal.fire(
+                'Welcome',
+                'Donate di maaaaaaaaa',
+                'success'
+            )
+        </script><br>
+    </div>
+    <div align="center" class="css-17cqjj4">VDat - @2008</div>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+    </script>
+
+</body></html>
